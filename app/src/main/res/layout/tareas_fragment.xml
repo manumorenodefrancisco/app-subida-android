@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/negro_bg"
+        android:scrollbars="none"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:text="TAREAS"
+                android:textColor="@color/white"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tab1"
+                    android:backgroundTint="@color/gris_azulado"
+                    android:text="Rutinarias"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tab2"
+                    android:backgroundTint="@color/gris_azulado"
+                    android:text="Opcionales"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tab3"
+                    android:backgroundTint="@color/gris_azulado"
+                    android:text="AA"/>
+            </LinearLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/btnCrearTarea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CREAR TAREA"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_margin="5dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/white" />
+
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rvTareas"/>
+        </LinearLayout>
+    </ScrollView>
+    
+    <LinearLayout
+        android:id="@+id/layoutFormulario"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D3000000"
+        android:gravity="center"
+        android:paddingHorizontal="24dp"
+        android:visibility="visible">
+
+    <!-- Contenedor del formulario (Ocupará la mitad inferior) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:elevation="16dp"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NUEVA TAREA"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Título de la tarea"
+                android:textColorHint="#888888"
+                app:hintTextColor="@color/white"
+                app:boxStrokeColor="@color/white"
+                app:boxBackgroundColor="#2C2C2C"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTituloTarea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Elige día/s:"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="-15dp"
+                android:layout_marginEnd="-15dp"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <CheckBox android:id="@+id/chkL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="L" android:textColor="@color/white"/>
+                <CheckBox android:id="@+id/chkM" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="M" android:textColor="@color/white"/>
+                <CheckBox android:id="@+id/chkX" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="X" android:textColor="@color/white"/>
+                <CheckBox android:id="@+id/chkJ" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="J" android:textColor="@color/white"/>
+                <CheckBox android:id="@+id/chkV" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="V" android:textColor="@color/white"/>
+                <CheckBox android:id="@+id/chkS" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S" android:textColor="@color/white"/>
+                <CheckBox android:id="@+id/chkD" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="D" android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="¿Repetir cada semana?:"
+                    android:layout_marginEnd="12dp"/>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchRepetir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Dificultad de tarea:"/>
+
+                <RadioGroup
+                    android:id="@+id/rgDificultad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <RadioButton android:id="@+id/rbFacil" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="I" android:textColor="@color/white" android:layout_marginEnd="8dp"/>
+                    <RadioButton android:id="@+id/rbMedia" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="II" android:textColor="@color/white" android:layout_marginEnd="8dp"/>
+                    <RadioButton android:id="@+id/rbDificil" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="III" android:textColor="@color/white"/>
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#444444"
+                    android:textColor="@color/white"
+                    android:text="Cancelar"
+                    android:layout_marginEnd="8dp"/>
+
+                <Button
+                    android:id="@+id/btnGuardarTarea"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#C7C7C7"
+                    android:textColor="@color/black"
+                    android:text="Guardar"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    
+</FrameLayout>
