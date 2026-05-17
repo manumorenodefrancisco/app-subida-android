@@ -325,7 +325,7 @@
                 android:elevation="0dp" />
         </LinearLayout>
 
-
+        <!--
         <LinearLayout
             android:id="@+id/panel_atributos"
             android:layout_width="match_parent"
@@ -576,14 +576,14 @@
                         android:shadowRadius="10" />
             </LinearLayout>
         </LinearLayout>
-
+-->
 
         <LinearLayout
             android:id="@+id/panel_logros"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginBottom="14dp">
 
             <LinearLayout
@@ -837,7 +837,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginBottom="14dp">
 
             <LinearLayout
@@ -1021,7 +1021,7 @@
                             android:background="@drawable/bg_equip_icon_d">
                             <ImageView android:layout_width="18dp" android:layout_height="18dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_shield" app:tint="@color/rangod"
+                                android:src="@drawable/ic_shield" app:tint="#aaccff"
                                 android:contentDescription="Pies"/>
                         </FrameLayout>
 
@@ -1039,7 +1039,7 @@
                                     android:textSize="8sp" android:letterSpacing="0.08"
                                     android:fontFamily="@font/orbitron_bold" android:layout_marginEnd="8dp"/>
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                    android:text="[D]" android:textColor="@color/rangod"
+                                    android:text="[D]" android:textColor="#aaccff"
                                     android:textSize="8sp" android:fontFamily="@font/orbitron_bold"/>
                             </LinearLayout>
                         </LinearLayout>

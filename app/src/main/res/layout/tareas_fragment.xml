@@ -1,225 +1,327 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/negro_bg"
-        android:scrollbars="none"
-        android:fillViewport="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:text="TAREAS"
-                android:textColor="@color/white"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
+    android:layout_height="match_parent"
+    android:background="@color/negro_bg"
+    android:fillViewport="true">
 
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tab1"
-                    android:backgroundTint="@color/gris_azulado"
-                    android:text="Rutinarias"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tab2"
-                    android:backgroundTint="@color/gris_azulado"
-                    android:text="Opcionales"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tab3"
-                    android:backgroundTint="@color/gris_azulado"
-                    android:text="AA"/>
-            </LinearLayout>
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:id="@+id/btnCrearTarea"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginBottom="5dp"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CREAR TAREA"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:layout_margin="5dp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@color/white" />
-
-            </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rvTareas"/>
-        </LinearLayout>
-    </ScrollView>
-    
     <LinearLayout
-        android:id="@+id/layoutFormulario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#D3000000"
-        android:gravity="center"
-        android:paddingHorizontal="24dp"
-        android:visibility="visible">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- Contenedor del formulario (Ocupará la mitad inferior) -->
+        <!-- CABECERA -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/tvTablonTareas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TABLÓN DE TAREAS"
+                    android:fontFamily="@font/orbitron_bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:letterSpacing="0.10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REINICIO EN ◈ 08:42:15 ◈ PENALIZACIÓN ACTIVA"
+                    android:fontFamily="@font/orbitron_medium"
+                    android:textSize="8sp"
+                    android:textColor="@color/gris_azulado" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XP GANADA HOY"
+                    android:fontFamily="@font/orbitron_medium"
+                    android:textSize="8sp"
+                    android:textColor="@color/gris_azulado" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+120"
+                    android:fontFamily="@font/orbitron_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/naranja_principal" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- PANEL PROGRESO DIARIO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1E1E1E"
-            android:elevation="16dp"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="12dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/neon_panel">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NUEVA TAREA"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
-
-            <com.google.android.material.textfield.TextInputLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Título de la tarea"
-                android:textColorHint="#888888"
-                app:hintTextColor="@color/white"
-                app:boxStrokeColor="@color/white"
-                app:boxBackgroundColor="#2C2C2C"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PROGRESO DIARIO"
+                    android:fontFamily="@font/orbitron_medium"
+                    android:textSize="8sp"
+                    android:textColor="@color/gris_azulado" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1/4 COMPLETADAS"
+                    android:fontFamily="@font/orbitron_bold"
+                    android:textSize="8sp"
+                    android:textColor="@color/azul_brillante"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTituloTarea"
+            <ProgressBar
+                android:id="@+id/progressDiario"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:max="4"
+                android:progress="1"
+                android:progressDrawable="@drawable/progress_bar_neon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_clock"
+                        app:tint="@color/gris_azulado" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Tiempo restante: 08:42:15"
+                        android:fontFamily="@font/rajdhani_medium"
+                        android:textSize="11sp"
+                        android:textColor="@color/gris_azulado" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_warning"
+                        app:tint="@color/warning" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Penalización"
+                        android:fontFamily="@font/rajdhani_medium"
+                        android:textSize="11sp"
+                        android:textColor="@color/warning" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- FILTROS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TODAS"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/filter_tab_active"
+                android:textColor="@color/azul_brillante"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="9sp"
+                android:layout_marginEnd="6dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DIARIAS"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/filter_tab_inactive"
+                android:textColor="@color/gris_azulado"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="9sp"
+                android:layout_marginEnd="6dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SECUNDARIAS"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/filter_tab_inactive"
+                android:textColor="@color/gris_azulado"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="9sp"/>
+        </LinearLayout>
+
+        <!-- TARJETA DE TAREA EJEMPLO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/task_card">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/task_header">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_book"
+                        app:tint="@color/azul_neon"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ACADEMIA"
+                        android:textColor="@color/azul_neon"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:textSize="9sp"
+                        android:letterSpacing="0.1" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="DIARIA"
+                    android:textColor="@color/azul_brillante"
+                    android:fontFamily="@font/orbitron_bold"
+                    android:textSize="7sp"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:background="@drawable/badge_diaria"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Completar módulo de Android Studio"
+                    android:textColor="@color/texto_misiones"
+                    android:fontFamily="@font/rajdhani_bold"
+                    android:textSize="15sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Elige día/s:"
-                android:layout_marginBottom="5dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="-15dp"
-                android:layout_marginEnd="-15dp"
-                android:gravity="center"
-                android:layout_marginBottom="10dp">
-
-                <CheckBox android:id="@+id/chkL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="L" android:textColor="@color/white"/>
-                <CheckBox android:id="@+id/chkM" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="M" android:textColor="@color/white"/>
-                <CheckBox android:id="@+id/chkX" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="X" android:textColor="@color/white"/>
-                <CheckBox android:id="@+id/chkJ" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="J" android:textColor="@color/white"/>
-                <CheckBox android:id="@+id/chkV" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="V" android:textColor="@color/white"/>
-                <CheckBox android:id="@+id/chkS" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S" android:textColor="@color/white"/>
-                <CheckBox android:id="@+id/chkD" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="D" android:textColor="@color/white"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="¿Repetir cada semana?:"
-                    android:layout_marginEnd="12dp"/>
+                    android:text="Implementar el RecyclerView de tareas con su adaptador personalizado."
+                    android:textColor="@color/gris_azulado"
+                    android:fontFamily="@font/rajdhani_medium"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchRepetir"
-                    android:layout_width="wrap_content"
-                    android:layout_height="33dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="14dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Dificultad de tarea:"/>
-
-                <RadioGroup
-                    android:id="@+id/rgDificultad"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center">
-                    <RadioButton android:id="@+id/rbFacil" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="I" android:textColor="@color/white" android:layout_marginEnd="8dp"/>
-                    <RadioButton android:id="@+id/rbMedia" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="II" android:textColor="@color/white" android:layout_marginEnd="8dp"/>
-                    <RadioButton android:id="@+id/rbDificil" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="III" android:textColor="@color/white"/>
-                </RadioGroup>
-            </LinearLayout>
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+350 XP"
+                        android:textColor="@color/naranja_principal"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:textSize="10sp" />
 
-                <Button
-                    android:id="@+id/btnCancelar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#444444"
-                    android:textColor="@color/white"
-                    android:text="Cancelar"
-                    android:layout_marginEnd="8dp"/>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnGuardarTarea"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#C7C7C7"
-                    android:textColor="@color/black"
-                    android:text="Guardar"/>
+                    <TextView
+                        android:id="@+id/btnAceptarTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+ ACEPTAR TAREA"
+                        android:background="@drawable/btn_aceptar_tarea"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="7dp"
+                        android:textColor="@color/azul_brillante"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:textSize="9sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
+        <!-- BOTÓN REGISTRAR NUEVA TAREA -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="14dp"
+            android:background="@drawable/btn_dashed_border"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_plus"
+                app:tint="@color/gris_azulado" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="REGISTRAR NUEVA TAREA"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="10sp"
+                android:textColor="@color/gris_azulado" />
+        </LinearLayout>
+
     </LinearLayout>
-    
-</FrameLayout>
+</ScrollView>
