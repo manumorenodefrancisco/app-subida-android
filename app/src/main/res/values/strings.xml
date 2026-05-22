@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Aura</string>
+    <string name="ic_question">\?</string>
+    <string name="ic_fire">🔥</string>
 </resources>

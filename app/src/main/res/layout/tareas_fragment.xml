@@ -4,15 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/negro_bg"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
-        <!-- CABECERA -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +68,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <!-- PANEL PROGRESO DIARIO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -149,7 +150,6 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <!-- FILTROS -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -298,7 +298,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- BOTÓN REGISTRAR NUEVA TAREA -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

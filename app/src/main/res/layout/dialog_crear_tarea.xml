@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bg_card_panel_azul">
+
+    <!-- Título del diálogo -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CREAR NUEVA TAREA"
+        android:textColor="@color/azul_brillante"
+        android:fontFamily="@font/orbitron_black"
+        android:textSize="18sp"
+        android:letterSpacing="0.15"
+        android:shadowColor="#AA00D4FF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="8"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/azul_border"
+        android:alpha="0.4"
+        android:layout_marginBottom="18dp" />
+
+    <!-- Título de la tarea -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TÍTULO"
+        android:textColor="@color/blaco_azulado"
+        android:fontFamily="@font/orbitron_bold"
+        android:textSize="10sp"
+        android:letterSpacing="0.1"
+        android:layout_marginBottom="6dp" />
+
+    <EditText
+        android:id="@+id/et_titulo_tarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la tarea..."
+        android:textColorHint="@color/gris_azulado"
+        android:textColor="@color/white"
+        android:fontFamily="@font/rajdhani_medium"
+        android:background="@drawable/bg_mission_item"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DETALLES (opcional)"
+        android:textColor="@color/blaco_azulado"
+        android:fontFamily="@font/orbitron_bold"
+        android:textSize="10sp"
+        android:letterSpacing="0.1"
+        android:layout_marginBottom="6dp" />
+
+    <EditText
+        android:id="@+id/et_descripcion_tarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción adicional..."
+        android:textColorHint="@color/gris_azulado"
+        android:textColor="@color/white"
+        android:fontFamily="@font/rajdhani_medium"
+        android:background="@drawable/bg_mission_item"
+        android:padding="12dp"
+        android:minLines="2"
+        android:gravity="top"
+        android:layout_marginBottom="20dp"
+        android:inputType="textMultiLine" />
+
+    <!-- Periodicidad -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PERIODICIDAD"
+        android:textColor="@color/blaco_azulado"
+        android:fontFamily="@font/orbitron_bold"
+        android:textSize="10sp"
+        android:letterSpacing="0.1" />
+
+    <RadioGroup
+        android:id="@+id/rg_periodicidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/rb_unica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Única"
+            android:paddingEnd="12dp"
+            android:textColor="@color/texto_misiones"
+            android:fontFamily="@font/rajdhani_semibold"
+            android:buttonTint="@color/azul_neon"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rb_diaria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Diaria"
+            android:paddingEnd="12dp"
+            android:textColor="@color/texto_misiones"
+            android:fontFamily="@font/rajdhani_semibold"
+            android:buttonTint="@color/azul_neon"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_semanal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Semanal"
+            android:textColor="@color/texto_misiones"
+            android:fontFamily="@font/rajdhani_semibold"
+            android:buttonTint="@color/azul_neon" />
+
+    </RadioGroup>
+
+    <!-- Dificultad -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NIVEL DE DIFICULTAD"
+        android:textColor="@color/blaco_azulado"
+        android:fontFamily="@font/orbitron_bold"
+        android:textSize="10sp"
+        android:letterSpacing="0.1" />
+
+    <RadioGroup
+        android:id="@+id/rg_dificultad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/rb_facil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I"
+            android:paddingEnd="20dp"
+            android:textColor="@color/azul_neon"
+            android:fontFamily="@font/orbitron_bold"
+            android:buttonTint="@color/azul_neon"
+            android:textSize="11sp"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/rb_media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="II"
+            android:paddingEnd="20dp"
+            android:textColor="@color/azul_neon"
+            android:fontFamily="@font/orbitron_bold"
+            android:buttonTint="@color/azul_neon"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_dificil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="III"
+            android:textColor="@color/azul_neon"
+            android:fontFamily="@font/orbitron_bold"
+            android:buttonTint="@color/azul_neon"
+            android:textSize="11sp" />
+    </RadioGroup>
+
+    <!-- Rutinaria -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/bg_mission_item"
+        android:alpha="0.9"
+        android:layout_marginBottom="16dp">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_rutinaria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/azul_brillante"
+            app:trackTint="@color/azul_border" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="REPETICIÓN RUTINARIA"
+            android:textColor="@color/azul_neon"
+            android:fontFamily="@font/orbitron_semibold"
+            android:textSize="10sp"
+            android:letterSpacing="0.05"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <!-- Días personalizados (inicialmente invisible) -->
+    <LinearLayout
+        android:id="@+id/container_dias_personalizados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DÍAS DE ACTIVACIÓN"
+            android:textColor="@color/blaco_azulado"
+            android:fontFamily="@font/orbitron_bold"
+            android:textSize="10sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_lunes"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="L"
+                android:gravity="center"
+                android:textColor="@color/texto_misiones"
+                android:fontFamily="@font/orbitron_semibold"
+                android:textSize="11sp"
+                app:buttonTint="@color/azul_neon"
+                android:buttonTint="@color/azul_neon" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_martes"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="M"
+                android:gravity="center"
+                android:textColor="@color/texto_misiones"
+                android:fontFamily="@font/orbitron_semibold"
+                android:textSize="11sp"
+                app:buttonTint="@color/azul_neon"
+                android:buttonTint="@color/azul_neon" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_miercoles"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="X"
+                android:gravity="center"
+                android:textColor="@color/texto_misiones"
+                android:fontFamily="@font/orbitron_semibold"
+                android:textSize="11sp"
+                app:buttonTint="@color/azul_neon"
+                android:buttonTint="@color/azul_neon" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_jueves"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="J"
+                android:gravity="center"
+                android:textColor="@color/texto_misiones"
+                android:fontFamily="@font/orbitron_semibold"
+                android:textSize="11sp"
+                app:buttonTint="@color/azul_neon"
+                android:buttonTint="@color/azul_neon" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_viernes"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="V"
+                android:gravity="center"
+                android:textColor="@color/texto_misiones"
+                android:fontFamily="@font/orbitron_semibold"
+                android:textSize="11sp"
+                app:buttonTint="@color/azul_neon"
+                android:buttonTint="@color/azul_neon" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_sabado"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="S"
+                android:gravity="center"
+                android:textColor="@color/texto_misiones"
+                android:fontFamily="@font/orbitron_semibold"
+                android:textSize="11sp"
+                app:buttonTint="@color/azul_neon"
+                android:buttonTint="@color/azul_neon" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_domingo"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="D"
+                android:gravity="center"
+                android:textColor="@color/texto_misiones"
+                android:fontFamily="@font/orbitron_semibold"
+                android:textSize="11sp"
+                app:buttonTint="@color/azul_neon"
+                android:buttonTint="@color/azul_neon" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btn_cancelar"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCELAR"
+            android:textColor="@color/gris_azulado"
+            android:fontFamily="@font/orbitron_bold"
+            android:textSize="12sp"
+            android:paddingHorizontal="16dp" />
+
+        <Button
+            android:id="@+id/btn_crear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREAR"
+            android:textColor="@color/negro_bg"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="12sp"
+            android:backgroundTint="@color/azul_neon"
+            android:elevation="4dp"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+
+</LinearLayout>

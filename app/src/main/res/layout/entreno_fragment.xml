@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="19dp"
-    android:paddingVertical="22dp"
+    android:paddingTop="20dp"
     android:background="@color/negro_bg"
     tools:context=".MainActivity">
 
@@ -16,6 +16,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:overScrollMode="never"
+        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-                <TextView
+                <!--<TextView
                 android:id="@+id/tvAura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,14 +42,13 @@
                 android:fontFamily="@font/orbitron_semibold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/contTitulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                app:layout_constraintTop_toBottomOf="@id/tvAura"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -87,8 +87,8 @@
                     android:id="@+id/tvSub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="SISTEMA DE MEJORA FÍSICA  -  RANGO C"
+                    android:layout_marginTop="6dp"
+                    android:text="SISTEMA DE MEJORA FÍSICA"
                     android:textColor="@color/gris_azulado"
                     android:textSize="12sp"
                     android:fontFamily="@font/orbitron_semibold"
@@ -431,7 +431,7 @@
                 android:id="@+id/cardMsg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="4dp"
                 android:foreground="@drawable/neon_panel_green"
                 app:layout_constraintTop_toBottomOf="@id/cardPodom"
                 app:layout_constraintStart_toStartOf="parent"
@@ -462,7 +462,7 @@
                 android:id="@+id/cardSem"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="4dp"
                 android:foreground="@drawable/neon_panel"
                 app:layout_constraintTop_toBottomOf="@id/cardMsg"
                 app:layout_constraintStart_toStartOf="parent"
@@ -483,7 +483,7 @@
                         android:letterSpacing="0.04"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ACTIVIDAD SEMANAL  -  PASOS"
+                        android:text="GRÁFICO SEMANAL  -  PASOS"
                         android:textColor="@color/azul_brillante"
                         android:textSize="14sp"
                         android:shadowColor="#AA00D4FF"
