@@ -111,7 +111,19 @@
                 app:cardBackgroundColor="@color/negriazul_bg_podom"
                 app:strokeColor="@color/azul_brillante"
                 app:strokeWidth="1dp">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SIN FUNCIONAMIENTO (mock data)"
+                    android:textColor="#E76262"
+                    android:textSize="18sp"
+                    android:shadowColor="#88FFFFFF"
+                    android:shadowDx="0"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="3dp"
+                    android:shadowDy="0"
+                    android:shadowRadius="3"
+                    android:fontFamily="@font/orbitron_semibold" />
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,6 +132,7 @@
                     <TextView
                         android:id="@+id/tvPodomTit"
                         android:layout_width="0dp"
+                        android:layout_marginTop="16dp"
                         android:layout_height="wrap_content"
                         android:text="◈  PODÓMETRO EN TIEMPO REAL  ◈"
                         android:textColor="@color/gris_azulado"
