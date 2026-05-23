@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/negro_bg"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/progreso_diario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/tvTablonTareas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TABLÓN DE TAREAS"
+                    android:fontFamily="@font/orbitron_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:letterSpacing="0.10" />
+
+                <TextView
+                    android:id="@+id/tv_tiempo_restante_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REINICIO EN ◈ 08:42:15"
+                    android:fontFamily="@font/orbitron_semibold"
+                    android:textSize="10sp"
+                    android:textColor="@color/gris_azulado2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XP GANADA HOY"
+                    android:fontFamily="@font/orbitron_semibold"
+                    android:textSize="9sp"
+                    android:textColor="@color/gris_azulado2" />
+                <TextView
+                    android:id="@+id/tv_xp_hoy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+0"
+                    android:fontFamily="@font/orbitron_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/naranja_principal" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/container_progreso_diario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/neon_panel">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PROGRESO DIARIO"
+                    android:fontFamily="@font/orbitron_semibold"
+                    android:textSize="8sp"
+                    android:textColor="@color/gris_azulado" />
+                <TextView
+                    android:id="@+id/tv_contador_progreso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0/0 COMPLETADAS"
+                    android:fontFamily="@font/orbitron_bold"
+                    android:textSize="8sp"
+                    android:textColor="@color/azul_brillante"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/progressDiario"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/progress_bar_neon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_clock"
+                        app:tint="@color/gris_azulado" />
+                    <TextView
+                        android:id="@+id/tv_tiempo_restante"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Tiempo restante: 08:42:15"
+                        android:fontFamily="@font/rajdhani_semibold"
+                        android:textSize="11sp"
+                        android:textColor="@color/gris_azulado" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/penalizacion_tareas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical"
+                    android:visibility="gone">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_warning"
+                        app:tint="@color/warning" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Penalización"
+                        android:fontFamily="@font/rajdhani_medium"
+                        android:textSize="11sp"
+                        android:textColor="@color/warning" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp">
+            <TextView
+                android:id="@+id/tab_todas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TODAS"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/filter_tab_active"
+                android:textColor="@color/azul_brillante"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="9sp"
+                android:layout_marginEnd="6dp"/>
+            <TextView
+                android:id="@+id/tab_diarias"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DIARIAS"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/filter_tab_inactive"
+                android:textColor="@color/gris_azulado"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="9sp"
+                android:layout_marginEnd="6dp"/>
+            <TextView
+                android:id="@+id/tab_semanales"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SEMANALES"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:background="@drawable/filter_tab_inactive"
+                android:textColor="@color/gris_azulado"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="9sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_crear_tarea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="14dp"
+            android:background="@drawable/btn_dashed_border"
+            android:layout_marginTop="2dp">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_plus"
+                app:tint="@color/gris_azulado" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="REGISTRAR NUEVA TAREA"
+                android:fontFamily="@font/orbitron_bold"
+                android:textSize="10sp"
+                android:textColor="@color/gris_azulado" />
+        </LinearLayout>
+
+        <!-- RecyclerView para mostrar tareas según el tab seleccionado -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_tareas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+</ScrollView>

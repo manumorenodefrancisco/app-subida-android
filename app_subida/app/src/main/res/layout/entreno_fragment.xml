@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="19dp"
+    android:paddingTop="20dp"
+    android:background="@color/negro_bg"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <!--<TextView
+                android:id="@+id/tvAura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOMBREDEAPP"
+                android:textColor="@color/azul_brillante"
+                android:textSize="16sp"
+                android:shadowColor="#AA00D4FF"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="10"
+                android:letterSpacing="0.2"
+                android:fontFamily="@font/orbitron_semibold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/tvTituloA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MÓDULO DE"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:shadowColor="#88FFFFFF"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="3"
+                    android:fontFamily="@font/orbitron_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTituloB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="ENTRENAMIENTO"
+                    android:textColor="@color/azul_brillante"
+                    android:textSize="20sp"
+                    android:shadowColor="#AA00D4FF"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="10"
+                    android:fontFamily="@font/orbitron_semibold"
+                    app:layout_constraintStart_toEndOf="@id/tvTituloA"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvTituloA" />
+
+                <TextView
+                    android:id="@+id/tvSub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="SISTEMA DE MEJORA FÍSICA"
+                    android:textColor="@color/gris_azulado"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/orbitron_semibold"
+                    app:layout_constraintTop_toBottomOf="@id/tvTituloA"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPodom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:foreground="@drawable/neon_panel"
+                app:layout_constraintTop_toBottomOf="@id/contTitulo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/negriazul_bg_podom"
+                app:strokeColor="@color/azul_brillante"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvPodomTit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="◈  PODÓMETRO EN TIEMPO REAL  ◈"
+                        android:textColor="@color/gris_azulado"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/orbitron_semibold"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <FrameLayout
+                        android:id="@+id/contRing"
+                        android:layout_width="260dp"
+                        android:layout_height="260dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintTop_toBottomOf="@id/tvPodomTit"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ProgressBar
+                            android:id="@+id/prog"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progress="66"
+                            android:progressDrawable="@drawable/ring_progress" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tvSteps"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_semibold"
+                                android:text="7.621"
+                                android:textColor="@color/white"
+                                android:textSize="34sp"
+                                android:shadowColor="#88FFFFFF"
+                                android:shadowDx="0"
+                                android:shadowDy="0"
+                                android:shadowRadius="3"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.40" />
+
+                            <TextView
+                                android:id="@+id/tvPasos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_semibold"
+                                android:text="PASOS"
+                                android:textColor="@color/texto_sobre_azules"
+                                android:textSize="12sp"
+                                android:shadowColor="#9900D4FF"
+                                android:shadowDx="0"
+                                android:shadowDy="0"
+                                android:shadowRadius="8"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tvSteps" />
+
+                            <TextView
+                                android:id="@+id/tvMeta"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/orbitron_semibold"
+                                android:text="META 10.000"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="12sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tvPasos" />
+
+                            <TextView
+                                android:id="@+id/tvPorc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/orbitron_semibold"
+                                android:text="76%"
+                                android:textColor="@color/naranja_principal"
+                                android:textSize="14sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tvMeta" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </FrameLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/contStats"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintTop_toBottomOf="@id/contRing"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardKm"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:foreground="@drawable/neon_panel"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/cardCal"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintHorizontal_weight="1"
+                            android:layout_marginEnd="8dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardBackgroundColor="@color/negriazul_podom2"
+                            app:strokeColor="@color/azul_border"
+                            app:strokeWidth="1dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="14dp"
+                                android:paddingHorizontal="12dp">
+
+                                <TextView
+                                    android:id="@+id/tvKmVal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5.12"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/orbitron_semibold"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tvKmLab"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="KILÓMETROS"
+                                    android:textColor="@color/gris_azulado"
+                                    android:textSize="9sp"
+                                    android:fontFamily="@font/orbitron_medium"
+                                    app:layout_constraintTop_toBottomOf="@id/tvKmVal"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardCal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:foreground="@drawable/neon_panel"
+                            app:layout_constraintStart_toEndOf="@id/cardKm"
+                            app:layout_constraintEnd_toStartOf="@id/cardTiempo"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintHorizontal_weight="1"
+                            android:layout_marginEnd="8dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardBackgroundColor="@color/negriazul_podom2"
+                            app:strokeColor="@color/azul_border"
+                            app:strokeWidth="1dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="14dp"
+                                android:paddingHorizontal="12dp">
+
+                                <TextView
+                                    android:id="@+id/tvCalVal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="304"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/orbitron_semibold"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tvCalLab"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="CALORÍAS"
+                                    android:textColor="@color/gris_azulado"
+                                    android:textSize="9sp"
+                                    android:fontFamily="@font/orbitron_medium"
+                                    app:layout_constraintTop_toBottomOf="@id/tvCalVal"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardTiempo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:foreground="@drawable/neon_panel"
+                            app:layout_constraintStart_toEndOf="@id/cardCal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:cardCornerRadius="8dp"
+                            app:cardBackgroundColor="@color/negriazul_podom2"
+                            app:strokeColor="@color/azul_border"
+                            app:strokeWidth="1dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="14dp"
+                                android:paddingHorizontal="12dp">
+
+                                <TextView
+                                    android:id="@+id/tvTiempoVal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="32:23"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/orbitron_semibold"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tvTiempoLab"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="TIEMPO"
+                                    android:textColor="@color/gris_azulado"
+                                    android:textSize="9sp"
+                                    android:fontFamily="@font/orbitron_medium"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/tvTiempoVal" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/contBtns"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/contStats"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnIniciar"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:text="▶ INICIAR"
+                            android:textColor="@color/azul_brillante"
+                            android:textSize="14sp"
+                            android:shadowColor="#AA00D4FF"
+                            android:shadowDx="0"
+                            android:shadowDy="0"
+                            android:shadowRadius="10"
+                            android:fontFamily="@font/orbitron_semibold"
+                            android:backgroundTint="@android:color/transparent"
+                            app:strokeColor="@color/azul_brillante"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="6dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/btnRef"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginEnd="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnRef"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:text="↻"
+                            android:textColor="@color/gris_azulado"
+                            android:textSize="18sp"
+                            android:padding="0dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:backgroundTint="@android:color/transparent"
+                            app:strokeColor="@color/azul_border"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="6dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardMsg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:foreground="@drawable/neon_panel_green"
+                app:layout_constraintTop_toBottomOf="@id/cardPodom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="@color/negro_bg2"
+                app:strokeColor="@color/success"
+                app:strokeWidth="1dp">
+
+                <TextView
+                    android:id="@+id/tvMsg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp"
+                    android:text="◈ El Sistema ha detectado actividad física elevada. Recibirás XP tras la meta diaria."
+                    android:textColor="@color/success"
+                    android:textSize="12sp"
+                    android:shadowColor="#6600FF99"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="8"
+                    android:fontFamily="@font/orbitron_semibold" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:foreground="@drawable/neon_panel"
+                app:layout_constraintTop_toBottomOf="@id/cardMsg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/negriazul_bg_podom"
+                app:strokeColor="@color/azul_border"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/tvSemTit"
+                        android:letterSpacing="0.04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GRÁFICO SEMANAL  -  PASOS"
+                        android:textColor="@color/azul_brillante"
+                        android:textSize="14sp"
+                        android:shadowColor="#AA00D4FF"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="10"
+                        android:fontFamily="@font/orbitron_semibold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <View
+                        android:id="@+id/vGraf"
+                        android:layout_width="0dp"
+                        android:layout_height="160dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/negriazul_podom3"
+                        app:layout_constraintTop_toBottomOf="@id/tvSemTit"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:id="@+id/vSepFin"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                app:layout_constraintTop_toBottomOf="@id/cardSem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

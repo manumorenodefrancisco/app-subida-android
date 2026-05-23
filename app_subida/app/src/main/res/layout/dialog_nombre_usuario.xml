@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_card_panel_azul">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BIENVENIDO"
+        android:textColor="@color/azul_brillante"
+        android:fontFamily="@font/orbitron_black"
+        android:textSize="18sp"
+        android:letterSpacing="0.15"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INTRODUCE USUARIO"
+        android:textColor="@color/blaco_azulado"
+        android:fontFamily="@font/orbitron_bold"
+        android:textSize="10sp"
+        android:letterSpacing="0.1"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/et_nombre_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de usuario..."
+        android:textColorHint="@color/gris_azulado"
+        android:textColor="@color/white"
+        android:fontFamily="@font/rajdhani_medium"
+        android:background="@drawable/bg_mission_item"
+        android:padding="14dp"
+        android:layout_marginBottom="24dp"
+        android:inputType="textPersonName"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/btn_aceptar_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ENTRAR"
+        android:textColor="@color/negro_bg"
+        android:fontFamily="@font/orbitron_black"
+        android:textSize="14sp"
+        android:backgroundTint="@color/azul_neon"
+        android:elevation="4dp" />
+
+</LinearLayout>

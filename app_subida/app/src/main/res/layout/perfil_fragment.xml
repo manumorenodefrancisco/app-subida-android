@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="utf-8"?><!-- GESTION DE TABS: En Fragment.kt, conecta los 3 botones para alternar
+     panel_atributos / panel_logros / panel_equipamiento con setVisibility(View.VISIBLE/GONE) -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/negro_bg"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="20dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_character_card"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/img_personaje"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:foreground="@drawable/neon_square_border"
+                    android:contentDescription="Personaje"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_character_placeholder" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/overlay_image_gradient" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btn_editar_perfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|start"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/bg_rank_badge"
+                        android:contentDescription="Editar perfil"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_edit"
+                        app:tint="@color/azul_neon" />
+
+                    <!--<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:letterSpacing="0.08"
+                        android:shadowColor="#AA00AAFF"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="8"
+                        android:text="999🪙"
+                        android:textColor="@color/azul_neon"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />-->
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_conf"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/bg_edit_button"
+                    android:contentDescription="Editar perfil"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_config"
+                    app:tint="@color/gris_azulado" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|start"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_nombre_usuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:letterSpacing="0.10"
+                        android:shadowColor="#CC000000"
+                        android:shadowDx="0"
+                        android:shadowDy="2"
+                        android:shadowRadius="12"
+                        android:text="KAI ESTRADA"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/tv_titulo_activo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rajdhani_semibold"
+                        android:shadowColor="#AA00AAFF"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="8"
+                        android:text="El Que Supera Limites"
+                        android:textColor="@color/azul_neon"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="14dp"
+                android:paddingTop="12dp"
+                android:paddingRight="14dp"
+                android:paddingBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_nivel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/orbitron_bold"
+                            android:shadowColor="#AA00D4FF"
+                            android:shadowDx="0"
+                            android:shadowDy="0"
+                            android:shadowRadius="10"
+                            android:text="42"
+                            android:textColor="@color/azul_brillante"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/orbitron_bold"
+                            android:letterSpacing="0.08"
+                            android:text="NIVEL"
+                            android:textColor="@color/gris_azulado"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_xp_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/orbitron_bold"
+                            android:shadowColor="#AAFFC400"
+                            android:shadowDx="0"
+                            android:shadowDy="0"
+                            android:shadowRadius="10"
+                            android:text="142K"
+                            android:textColor="@color/naranja_principal"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/orbitron_bold"
+                            android:letterSpacing="0.08"
+                            android:text="XP TOTAL"
+                            android:textColor="@color/gris_azulado"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+
+                    <!-- RACHA -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_racha"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/orbitron_bold"
+                            android:shadowColor="#AA00FF99"
+                            android:shadowDx="0"
+                            android:shadowDy="0"
+                            android:shadowRadius="10"
+                            android:text="7D"
+                            android:textColor="@color/success"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/orbitron_bold"
+                            android:letterSpacing="0.08"
+                            android:text="RACHA"
+                            android:textColor="@color/gris_azulado"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_progreso_nivel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:letterSpacing="0.15"
+                        android:text="PROGRESO NIV.0 → 1"
+                        android:textColor="@color/gris_azulado"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/tv_progreso_xp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:text="0 / 100"
+                        android:textColor="@color/azul_brillante"
+                        android:textSize="8sp" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/xp_bar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/xp_bar_progress" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_tab_skills"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_tab_inactive"
+                android:elevation="0dp"
+                android:fontFamily="@font/orbitron_bold"
+                android:letterSpacing="0.08"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:stateListAnimator="@null"
+                android:text="LOGROS"
+                android:textColor="@color/gris_azulado"
+                android:textSize="9sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_tab_gear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_tab_inactive"
+                android:elevation="0dp"
+                android:fontFamily="@font/orbitron_bold"
+                android:letterSpacing="0.05"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:stateListAnimator="@null"
+                android:text="EQUIPAMIENTO"
+                android:textColor="@color/gris_azulado"
+                android:textSize="8sp" />
+        </LinearLayout>-->
+
+        <LinearLayout
+            android:id="@+id/panel_logros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_neon_panel"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_panel_header"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:letterSpacing="0.20"
+                        android:shadowColor="#AA00AAFF"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="6"
+                        android:text="TITULOS DESBLOQUEADOS"
+                        android:textColor="@color/azul_neon"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:background="@drawable/bg_title_active"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/rajdhani_medium"
+                            android:text="Novato"
+                            android:textColor="@color/texto_misiones"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_rank_badge"
+                            android:fontFamily="@font/orbitron_bold"
+                            android:paddingLeft="6dp"
+                            android:paddingTop="2dp"
+                            android:paddingRight="6dp"
+                            android:paddingBottom="2dp"
+                            android:text="ACTIVO"
+                            android:textColor="@color/azul_brillante"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:background="@drawable/bg_title_inactive"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rajdhani_medium"
+                            android:text="El Que Supera Limites"
+                            android:textColor="@color/gris_azulado"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_title_inactive"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rajdhani_medium"
+                            android:text="Sin miedo al éxito"
+                            android:textColor="@color/gris_azulado"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_neon_panel"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_panel_header"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:letterSpacing="0.20"
+                        android:shadowColor="#AA00AAFF"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="6"
+                        android:text="LOGROS"
+                        android:textColor="@color/azul_neon"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_achievement_earned"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="@string/ic_question"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_bold"
+                                android:gravity="center"
+                                android:text="Primera Tarea"
+                                android:textColor="@color/azul_brillante"
+                                android:textSize="8sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/rajdhani_medium"
+                                android:gravity="center"
+                                android:text="Completa tu primera tarea"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:alpha="0.45"
+                            android:background="@drawable/bg_achievement_locked"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="@string/ic_fire"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_bold"
+                                android:gravity="center"
+                                android:text="Racha de Fuego"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="8sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/rajdhani_medium"
+                                android:gravity="center"
+                                android:text="7 días consecutivos"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:alpha="0.45"
+                            android:background="@drawable/bg_achievement_locked"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="@string/ic_fire"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_bold"
+                                android:gravity="center"
+                                android:text="Maratonista"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="8sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/rajdhani_medium"
+                                android:gravity="center"
+                                android:text="Camina 50km en total"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:alpha="0.45"
+                            android:background="@drawable/bg_achievement_locked"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="@string/ic_fire"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_bold"
+                                android:gravity="center"
+                                android:text="Erudito"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="8sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/rajdhani_medium"
+                                android:gravity="center"
+                                android:text="Lee durante 30 días"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:alpha="0.45"
+                            android:background="@drawable/bg_achievement_locked"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="@string/ic_fire"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_bold"
+                                android:gravity="center"
+                                android:text="Level 100"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="8sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/rajdhani_medium"
+                                android:gravity="center"
+                                android:text="Alcanza nivel 100"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:alpha="0.45"
+                            android:background="@drawable/bg_achievement_locked"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="@string/ic_question"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/orbitron_bold"
+                                android:gravity="center"
+                                android:text="Elite"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="8sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/rajdhani_medium"
+                                android:gravity="center"
+                                android:text="Mantén racha 30 días"
+                                android:textColor="@color/gris_azulado"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/panel_equipamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_neon_panel"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_panel_header"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:letterSpacing="0.20"
+                        android:shadowColor="#AA00AAFF"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="6"
+                        android:text="EQUIPAMIENTO ACTIVO"
+                        android:textColor="@color/azul_neon"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/orbitron_bold"
+                        android:letterSpacing="0.08"
+                        android:shadowColor="#AA00AAFF"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="8"
+                        android:text="999🪙"
+                        android:textColor="@color/azul_neon"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/gris_azulado"
+                        android:text="Completar tareas te da monedas según dificultad. La idea es con monedas comprar objetos y que luego salgan en el perfil."/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
