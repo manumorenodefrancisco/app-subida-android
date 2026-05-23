@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Aura"
+rootProject.name = "App_subida"
 include(":app")
  

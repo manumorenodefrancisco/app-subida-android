@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.aura"
+    namespace = "com.example.app_subida"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.aura"
+        applicationId = "com.example.app_subida"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
