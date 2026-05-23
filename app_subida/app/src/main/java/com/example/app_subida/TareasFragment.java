@@ -62,7 +62,6 @@ public class TareasFragment extends Fragment {
         // Inicializar base de datos
         database = AppDatabase.getInstance(requireContext());
 
-        // Inicializar vistas
         tvXpHoy = rootView.findViewById(R.id.tv_xp_hoy);
         tvTiempoRestanteHeader = rootView.findViewById(R.id.tv_tiempo_restante_header);
         tvContadorProgreso = rootView.findViewById(R.id.tv_contador_progreso);
@@ -91,7 +90,6 @@ public class TareasFragment extends Fragment {
     }
 
     private void configurarTabs() {
-        // Configurar clicks en los tabs
         tabTodas.setOnClickListener(v -> cambiarTab("TODAS"));
         tabDiarias.setOnClickListener(v -> cambiarTab("DIARIAS"));
         tabSemanales.setOnClickListener(v -> cambiarTab("SEMANALES"));
@@ -100,7 +98,6 @@ public class TareasFragment extends Fragment {
     private void cambiarTab(String tab) {
         tabActual = tab;
 
-        // Resetear todos los tabs a estado inactivo
         tabTodas.setBackgroundResource(R.drawable.filter_tab_inactive);
         tabTodas.setTextColor(ContextCompat.getColor(requireContext(), R.color.gris_azulado));
         tabDiarias.setBackgroundResource(R.drawable.filter_tab_inactive);
@@ -108,7 +105,6 @@ public class TareasFragment extends Fragment {
         tabSemanales.setBackgroundResource(R.drawable.filter_tab_inactive);
         tabSemanales.setTextColor(ContextCompat.getColor(requireContext(), R.color.gris_azulado));
 
-        // Activar el tab seleccionado
         switch (tab) {
             case "TODAS":
                 tabTodas.setBackgroundResource(R.drawable.filter_tab_active);
@@ -123,59 +119,43 @@ public class TareasFragment extends Fragment {
             case "SEMANALES":
                 tabSemanales.setBackgroundResource(R.drawable.filter_tab_active);
                 tabSemanales.setTextColor(ContextCompat.getColor(requireContext(), R.color.azul_brillante));
-                // Ocultar progreso diario para tareas semanales
                 containerProgresoDiario.setVisibility(View.GONE);
                 break;
         }
 
-        // Recargar tareas según el tab seleccionado
         cargarTareasSegunTab();
     }
 
     private void cargarDatosIniciales() {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Obtener fecha de hoy en formato YYYY-MM-DD
-            String hoy = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-
-            // Calcular XP ganada hoy desde la BD
-            Integer xpHoy = database.tareaDao().sumarXpEnRango(hoy, hoy);
-            if (xpHoy == null) xpHoy = 0;
-
-            // Obtener racha del usuario
             Usuario usuario = database.usuarioDao().getUsuario();
+            int xpTotal = (usuario != null) ? usuario.estadisticas.xpTotal : 0;
             int racha = (usuario != null) ? usuario.estadisticas.rachaDias : 0;
 
-            // Calcular progreso diario usando las queries correctas
-            // Total de tareas DIARIAS cuya fecha límite es hoy
+            String hoy = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
             int totalDiarias = database.tareaDao().contarDiariasPorFecha(hoy);
 
-            // Tareas DIARIAS completadas hoy
             int completadasDiarias = database.tareaDao().contarDiariasCompletadasPorFecha(hoy);
 
-            int finalXpHoy = xpHoy;
+            int finalXpHoy = xpTotal;
             int finalTotalDiarias = totalDiarias;
             int finalCompletadasDiarias = completadasDiarias;
             int finalRacha = racha;
 
             requireActivity().runOnUiThread(() -> {
-                // Actualizar XP ganada hoy
                 tvXpHoy.setText("+" + finalXpHoy);
 
-                // Actualizar contador de progreso
                 tvContadorProgreso.setText(finalCompletadasDiarias + "/" + finalTotalDiarias + " COMPLETADAS");
 
-                // Actualizar barra de progreso con porcentaje real
                 if (finalTotalDiarias > 0) {
                     // Calcular porcentaje: (completadas * 100) / total
                     int porcentaje = (finalCompletadasDiarias * 100) / finalTotalDiarias;
                     progressDiario.setProgress(porcentaje);
                 } else {
-                    // Si no hay tareas diarias, progreso en 0
                     progressDiario.setProgress(0);
                 }
 
-                // Mostrar/ocultar penalización según la racha
-                // Si racha >= 1, ocultar. Si racha < 1, mostrar
                 if (finalRacha >= 1) {
                     penalizacionLayout.setVisibility(View.GONE);
                 } else {
@@ -186,7 +166,6 @@ public class TareasFragment extends Fragment {
             });
         });
 
-        // Cargar las tareas en el RecyclerView
         cargarTareasSegunTab();
     }
 
@@ -195,15 +174,11 @@ public class TareasFragment extends Fragment {
             List<Tarea> tareas = new ArrayList<>();
             String fechaActual = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).format(new Date());
 
-            // Filtrar tareas según el tab seleccionado
             if (tabActual.equals("TODAS")) {
-                // Todas las tareas activas (pendientes o completadas hoy)
                 tareas = database.tareaDao().getActivas();
             } else if (tabActual.equals("DIARIAS")) {
-                // Solo tareas diarias
                 tareas = database.tareaDao().getPorPeriodicidad("DIARIA");
             } else if (tabActual.equals("SEMANALES")) {
-                // Solo tareas semanales
                 tareas = database.tareaDao().getPorPeriodicidad("SEMANAL");
             }
 
@@ -220,7 +195,6 @@ public class TareasFragment extends Fragment {
             @Override
             public void run() {
                 actualizarTiempoRestante();
-                // Actualizar cada 60 segundos (1 minuto) para no marear
                 handler.postDelayed(this, 60000);
             }
         };
@@ -228,7 +202,7 @@ public class TareasFragment extends Fragment {
     }
 
     private void actualizarTiempoRestante() {
-        // Calcular tiempo hasta las 23:59:59
+        //23:59:59
         Calendar ahora = Calendar.getInstance();
         Calendar finDelDia = Calendar.getInstance();
         finDelDia.set(Calendar.HOUR_OF_DAY, 23);
@@ -237,14 +211,11 @@ public class TareasFragment extends Fragment {
 
         long diffMillis = finDelDia.getTimeInMillis() - ahora.getTimeInMillis();
 
-        // Calcular horas y minutos (sin segundos para no marear)
         long horas = (diffMillis / (1000 * 60 * 60)) % 24;
         long minutos = (diffMillis / (1000 * 60)) % 60;
 
-        // Formato: "22h 18m"
         String tiempoFormateado = horas + "h " + minutos + "m";
 
-        // Actualizar textos
         if (tvTiempoRestanteHeader != null) {
             tvTiempoRestanteHeader.setText("REINICIO EN ◈ " + tiempoFormateado);
         }
@@ -253,7 +224,7 @@ public class TareasFragment extends Fragment {
         }
     }
 
-    // Mostrar el diálogo de crear tarea (mismo que en HomeFragment)
+    //mismo metodo que en HomeFragment
     private void mostrarDialogCrearTarea() {
         Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -281,16 +252,13 @@ public class TareasFragment extends Fragment {
         AppCompatCheckBox cbSabado = dialog.findViewById(R.id.cb_sabado);
         AppCompatCheckBox cbDomingo = dialog.findViewById(R.id.cb_domingo);
 
-        // Contenedor del switch rutinaria (para poder ocultarlo)
         View containerSwitchRutinaria = dialog.findViewById(R.id.container_switch_rutinaria);
 
-        // Mostrar/ocultar días personalizados y switch rutinaria según periodicidad
         View.OnClickListener actualizarVisibilidad = v -> {
             boolean esSemanal = rbSemanal.isChecked();
             boolean esUnica = rbUnica.isChecked();
             boolean esRutinaria = switchRutinaria.isChecked();
 
-            // Ocultar switch rutinaria si periodicidad es UNICA
             if (esUnica) {
                 containerSwitchRutinaria.setVisibility(View.GONE);
                 switchRutinaria.setChecked(false); // Desactivar si estaba activo
@@ -298,7 +266,6 @@ public class TareasFragment extends Fragment {
                 containerSwitchRutinaria.setVisibility(View.VISIBLE);
             }
 
-            // Mostrar días personalizados solo si es SEMANAL y RUTINARIA
             containerDiasPersonalizados.setVisibility(
                 (esSemanal && esRutinaria) ? View.VISIBLE : View.GONE
             );
@@ -318,7 +285,6 @@ public class TareasFragment extends Fragment {
 
             String descripcion = etDescripcion.getText().toString().trim();
 
-            // Determinar periodicidad
             String periodicidad = "UNICA";
             if (rbDiaria.isChecked()) {
                 periodicidad = "DIARIA";
@@ -328,7 +294,6 @@ public class TareasFragment extends Fragment {
 
             boolean esRutinaria = switchRutinaria.isChecked();
 
-            // Recoger días seleccionados
             List<String> diasSeleccionados = new ArrayList<>();
             if (cbLunes.isChecked()) diasSeleccionados.add("L");
             if (cbMartes.isChecked()) diasSeleccionados.add("M");
@@ -340,14 +305,12 @@ public class TareasFragment extends Fragment {
 
             String diasSemana = diasSeleccionados.isEmpty() ? null : String.join(",", diasSeleccionados);
 
-            // Determinar dificultad
             String dificultad = "FACIL";
             int dificultadChecked = rgDificultad.getCheckedRadioButtonId();
             if (dificultadChecked == R.id.rb_facil) dificultad = "FACIL";
             else if (dificultadChecked == R.id.rb_media) dificultad = "MEDIA";
             else if (dificultadChecked == R.id.rb_dificil) dificultad = "DIFICIL";
 
-            // Crear objeto Tarea
             Tarea nuevaTarea = new Tarea();
             nuevaTarea.titulo = titulo;
             nuevaTarea.descripcion = descripcion;
@@ -363,7 +326,6 @@ public class TareasFragment extends Fragment {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
             nuevaTarea.fechaCreacion = sdf.format(new Date());
 
-            // Calcular fecha límite según periodicidad
             Calendar cal = Calendar.getInstance();
             if (periodicidad.equals("DIARIA")) {
                 cal.set(Calendar.HOUR_OF_DAY, 23);
@@ -380,7 +342,6 @@ public class TareasFragment extends Fragment {
                 cal.set(Calendar.SECOND, 59);
                 nuevaTarea.fechaLimite = sdf.format(cal.getTime());
             } else {
-                // Tareas UNICAS no tienen fecha límite
                 nuevaTarea.fechaLimite = null;
             }
 
@@ -405,13 +366,10 @@ public class TareasFragment extends Fragment {
         dialog.show();
     }
 
-    // Guardar tarea en base de datos
     private void guardarTarea(Tarea tarea) {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Guardar la tarea en la BD
             database.tareaDao().insertar(tarea);
 
-            // Mensaje informativo solo para tareas rutinarias
             String mensajeToast = "Tarea creada con éxito";
             if (tarea.esRutinaria) {
                 if (tarea.periodicidad.equals("DIARIA")) {
@@ -463,10 +421,14 @@ public class TareasFragment extends Fragment {
 
             database.tareaDao().actualizar(tarea);
 
-            // Log de XP ganado
+            Usuario usuario = database.usuarioDao().getUsuario();
+            if (usuario != null) {
+                usuario.estadisticas.xpTotal += tarea.xpRecompensa;
+                database.usuarioDao().actualizar(usuario);
+            }
+
             database.registroSistemaDao().logXP(tarea.xpRecompensa, tarea.titulo);
 
-            // Verificar si es la primera tarea completada
             int totalCompletadas = database.tareaDao().contarTodasCompletadas();
             if (totalCompletadas == 1) {
                 database.registroSistemaDao().logPrimeraCompletada();
@@ -477,7 +439,6 @@ public class TareasFragment extends Fragment {
                 database.registroSistemaDao().logMilestone(totalCompletadas);
             }
 
-            // Verificar día productivo (más de 5 tareas en un día)
             String hoy = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             int tareasHoy = database.tareaDao().contarCompletadasPorFecha(hoy);
             if (tareasHoy == 5) {
@@ -501,8 +462,6 @@ public class TareasFragment extends Fragment {
         }
     }
 
-    // Método para regenerar tareas DIARIAS y SEMANALES RUTINARIAS automáticamente
-    // Solo regenera tareas que tengan esRutinaria = true
     private void regenerarTareasRecurrentes() {
         Executors.newSingleThreadExecutor().execute(() -> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
@@ -510,15 +469,12 @@ public class TareasFragment extends Fragment {
             String hoy = sdfFecha.format(new Date());
             Calendar cal = Calendar.getInstance();
 
-            // Obtener solo las plantillas RUTINARIAS (esRutinaria = true)
             List<Tarea> plantillas = database.tareaDao().obtenerPlantillas();
 
             for (Tarea plantilla : plantillas) {
-                // Verificar si ya existe una instancia para hoy
                 int yaExiste = database.tareaDao().existeInstanciaParaFecha((int) plantilla.id, hoy);
 
                 if (yaExiste == 0) {
-                    // No existe instancia para hoy, crear una nueva
                     Tarea nuevaInstancia = new Tarea();
                     nuevaInstancia.titulo = plantilla.titulo;
                     nuevaInstancia.descripcion = plantilla.descripcion;
@@ -532,18 +488,16 @@ public class TareasFragment extends Fragment {
                     nuevaInstancia.completada = false;
                     nuevaInstancia.fechaCreacion = sdf.format(new Date());
 
-                    // Establecer referencia a la plantilla
                     nuevaInstancia.idTareaPlantilla = (int) plantilla.id;
 
-                    // Calcular fecha límite según tipo
                     if (plantilla.periodicidad.equals("DIARIA")) {
-                        // Fecha límite: hoy a las 23:59:59
+                        // 23:59:59
                         cal.set(Calendar.HOUR_OF_DAY, 23);
                         cal.set(Calendar.MINUTE, 59);
                         cal.set(Calendar.SECOND, 59);
                         nuevaInstancia.fechaLimite = sdf.format(cal.getTime());
                     } else if (plantilla.periodicidad.equals("SEMANAL")) {
-                        // Fecha límite: domingo de esta semana a las 23:59:59
+                        //domingo a las 23:59:59
                         int diaActual = cal.get(Calendar.DAY_OF_WEEK);
                         int diasHastaDomingo = Calendar.SUNDAY - diaActual;
                         if (diasHastaDomingo < 0) diasHastaDomingo += 7;
@@ -556,7 +510,6 @@ public class TareasFragment extends Fragment {
 
                     nuevaInstancia.fechaCompletado = null;
 
-                    // Insertar la nueva instancia
                     database.tareaDao().insertar(nuevaInstancia);
                 }
             }

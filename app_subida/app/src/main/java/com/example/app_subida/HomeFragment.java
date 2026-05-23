@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.app_subida.data.AppDatabase;
 import com.example.app_subida.data.entities.Tarea;
+import com.example.app_subida.data.entities.Usuario;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -129,22 +130,19 @@ public class HomeFragment extends Fragment {
         AppCompatCheckBox cbSabado = dialog.findViewById(R.id.cb_sabado);
         AppCompatCheckBox cbDomingo = dialog.findViewById(R.id.cb_domingo);
 
-        // Contenedor del switch de rutinaria
         LinearLayout containerSwitchRutinaria = dialog.findViewById(R.id.container_switch_rutinaria);
 
-        // Actualizar visibilidad de switch y días personalizados según periodicidad
         View.OnClickListener actualizarVisibilidad = v -> {
             boolean esUnica = rbUnica.isChecked();
             boolean esDiaria = rbDiaria.isChecked();
             boolean esSemanal = rbSemanal.isChecked();
             boolean esRutinaria = switchRutinaria.isChecked();
 
-            // Mostrar switch solo si es DIARIA o SEMANAL
             if (esDiaria || esSemanal) {
                 containerSwitchRutinaria.setVisibility(View.VISIBLE);
             } else {
                 containerSwitchRutinaria.setVisibility(View.GONE);
-                switchRutinaria.setChecked(false); // Desactivar si estaba activo
+                switchRutinaria.setChecked(false);
             }
 
             // Mostrar días personalizados solo si es SEMANAL y RUTINARIA
@@ -156,7 +154,6 @@ public class HomeFragment extends Fragment {
         rgPeriodicidad.setOnCheckedChangeListener((group, checkedId) -> actualizarVisibilidad.onClick(null));
         switchRutinaria.setOnCheckedChangeListener((buttonView, isChecked) -> actualizarVisibilidad.onClick(null));
 
-        // Llamar al inicio para configurar visibilidad inicial (UNICA está seleccionada por defecto)
         actualizarVisibilidad.onClick(null);
 
         btnCancelar.setOnClickListener(v -> dialog.dismiss());
@@ -197,7 +194,7 @@ public class HomeFragment extends Fragment {
             else if (dificultadChecked == R.id.rb_media) dificultad = "MEDIA";
             else if (dificultadChecked == R.id.rb_dificil) dificultad = "DIFICIL";
 
-            Tarea nuevaTarea = new Tarea(); //crear objeto de entidad Tarea
+            Tarea nuevaTarea = new Tarea();
             nuevaTarea.titulo = titulo;
             nuevaTarea.descripcion = descripcion;
             nuevaTarea.periodicidad = periodicidad;
@@ -235,7 +232,7 @@ public class HomeFragment extends Fragment {
             nuevaTarea.fechaCompletado = null;
             nuevaTarea.idTareaPlantilla = null; // null porque es una tarea nueva, no una instancia
 
-            guardarTarea(nuevaTarea);//Guardar en Room
+            guardarTarea(nuevaTarea);//Room
 
             dialog.dismiss();
             // Toast se muestra en guardarTarea()
@@ -247,10 +244,9 @@ public class HomeFragment extends Fragment {
     //guarda una tarea en la base de datos en un hilo secundario y luego recarga las tareas pendientes en el UI
     private void guardarTarea(Tarea tarea) {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Guardar la tarea en la BD
             database.tareaDao().insertar(tarea);
 
-            // Verificar si es la primera tarea creada (usando SharedPreferences)
+            // Verificar si es la primera tarea creada
             SharedPreferences prefs = requireActivity().getSharedPreferences("aura_prefs", Context.MODE_PRIVATE);
             boolean primeraTareaCreada = prefs.getBoolean("primera_tarea_creada", false);
             if (!primeraTareaCreada) {
@@ -258,7 +254,6 @@ public class HomeFragment extends Fragment {
                 prefs.edit().putBoolean("primera_tarea_creada", true).apply();
             }
 
-            // Mensaje informativo según tipo y si es rutinaria
             String mensajeToast = "Tarea creada con éxito";
 
             if (tarea.periodicidad.equals("DIARIA") && tarea.esRutinaria) {
@@ -315,21 +310,20 @@ public class HomeFragment extends Fragment {
             String[] ids = {"dia_lunes", "dia_martes", "dia_miercoles", "dia_jueves",
                     "dia_viernes", "dia_sabado", "dia_domingo"};
 
-            // Obtener el día de hoy
             Calendar hoy = Calendar.getInstance();
             int diaHoyDeLaSemana = hoy.get(Calendar.DAY_OF_WEEK); // 1=Domingo, 2=Lunes, ..., 7=Sábado
 
             // Convertir a índice 0-6 donde 0=Lunes, 6=Domingo
             int diaHoyIndice;
             if (diaHoyDeLaSemana == Calendar.SUNDAY) {
-                diaHoyIndice = 6; // Domingo es el último día
+                diaHoyIndice = 6;
             } else {
-                diaHoyIndice = diaHoyDeLaSemana - 2; // Lunes=0, Martes=1, ..., Sábado=5
+                diaHoyIndice = diaHoyDeLaSemana - 2;
             }
 
-            // Calcular el lunes de esta semana
+            // Calcular lunes de esta semana
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DAY_OF_MONTH, -diaHoyIndice); // Retroceder hasta el lunes
+            cal.add(Calendar.DAY_OF_MONTH, -diaHoyIndice);
             cal.set(Calendar.HOUR_OF_DAY, 0);
             cal.set(Calendar.MINUTE, 0);
             cal.set(Calendar.SECOND, 0);
@@ -503,17 +497,20 @@ public class HomeFragment extends Fragment {
 
     private void completarTarea(Tarea tarea) {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Marcar como completada
             tarea.completada = true;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
             tarea.fechaCompletado = sdf.format(new Date());
 
             database.tareaDao().actualizar(tarea);
 
-            // Log de XP ganado
+            Usuario usuario = database.usuarioDao().getUsuario();
+            if (usuario != null) {
+                usuario.estadisticas.xpTotal += tarea.xpRecompensa;
+                database.usuarioDao().actualizar(usuario);
+            }
+
             database.registroSistemaDao().logXP(tarea.xpRecompensa, tarea.titulo);
 
-            // Verificar si es la primera tarea completada
             int totalCompletadas = database.tareaDao().contarTodasCompletadas();
             if (totalCompletadas == 1) {
                 database.registroSistemaDao().logPrimeraCompletada();
@@ -524,14 +521,12 @@ public class HomeFragment extends Fragment {
                 database.registroSistemaDao().logMilestone(totalCompletadas);
             }
 
-            // Verificar día productivo (más de 5 tareas en un día)
             String hoy = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             int tareasHoy = database.tareaDao().contarCompletadasPorFecha(hoy);
             if (tareasHoy == 5) {
                 database.registroSistemaDao().logDiaProductivo(tareasHoy);
             }
 
-            // Mensaje diferente según tipo de tarea (solo si es rutinaria)
             String mensaje = "¡Tarea completada! +" + tarea.xpRecompensa + " XP";
             if (tarea.esRutinaria) {
                 if (tarea.periodicidad.equals("DIARIA")) {
@@ -578,7 +573,6 @@ public class HomeFragment extends Fragment {
                 containerLogs.removeAllViews();
 
                 if (logs.isEmpty()) {
-                    // Mostrar mensaje de que no hay logs
                     TextView tvVacio = new TextView(requireContext());
                     tvVacio.setText("No hay actividad reciente");
                     tvVacio.setTextColor(ContextCompat.getColor(requireContext(), R.color.gris_azulado));
@@ -618,7 +612,6 @@ public class HomeFragment extends Fragment {
         tvHora.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         logRow.addView(tvHora);
 
-        // TextView badge con tipo
         TextView tvBadge = new TextView(requireContext());
         LinearLayout.LayoutParams badgeParams = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -640,7 +633,6 @@ public class HomeFragment extends Fragment {
         }
         logRow.addView(tvBadge);
 
-        // TextView mensaje
         TextView tvMensaje = new TextView(requireContext());
         tvMensaje.setLayoutParams(new LinearLayout.LayoutParams(
             0,
@@ -655,7 +647,7 @@ public class HomeFragment extends Fragment {
 
         container.addView(logRow);
 
-        // Agregar separador si no es el último
+        //meter separador si no es el último
         View separator = new View(requireContext());
         separator.setLayoutParams(new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -695,8 +687,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    // Método para regenerar tareas DIARIAS y SEMANALES RUTINARIAS automáticamente
-    // Solo regenera tareas que tengan esRutinaria = true
     private void regenerarTareasRecurrentes() {
         Executors.newSingleThreadExecutor().execute(() -> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
@@ -704,15 +694,12 @@ public class HomeFragment extends Fragment {
             String hoy = sdfFecha.format(new Date());
             Calendar cal = Calendar.getInstance();
 
-            // Obtener solo las plantillas RUTINARIAS (esRutinaria = true)
             List<Tarea> plantillas = database.tareaDao().obtenerPlantillas();
 
             for (Tarea plantilla : plantillas) {
-                // Verificar si ya existe una instancia para hoy
                 int yaExiste = database.tareaDao().existeInstanciaParaFecha((int) plantilla.id, hoy);
 
                 if (yaExiste == 0) {
-                    // No existe instancia para hoy, crear una nueva
                     Tarea nuevaInstancia = new Tarea();
                     nuevaInstancia.titulo = plantilla.titulo;
                     nuevaInstancia.descripcion = plantilla.descripcion;
@@ -726,18 +713,16 @@ public class HomeFragment extends Fragment {
                     nuevaInstancia.completada = false;
                     nuevaInstancia.fechaCreacion = sdf.format(new Date());
 
-                    // Establecer referencia a la plantilla
                     nuevaInstancia.idTareaPlantilla = (int) plantilla.id;
 
-                    // Calcular fecha límite según tipo
                     if (plantilla.periodicidad.equals("DIARIA")) {
-                        // Fecha límite: hoy a las 23:59:59
+                        // 23:59:59
                         cal.set(Calendar.HOUR_OF_DAY, 23);
                         cal.set(Calendar.MINUTE, 59);
                         cal.set(Calendar.SECOND, 59);
                         nuevaInstancia.fechaLimite = sdf.format(cal.getTime());
                     } else if (plantilla.periodicidad.equals("SEMANAL")) {
-                        // Fecha límite: domingo de esta semana a las 23:59:59
+                        //domingo a las 23:59:59
                         int diaActual = cal.get(Calendar.DAY_OF_WEEK);
                         int diasHastaDomingo = Calendar.SUNDAY - diaActual;
                         if (diasHastaDomingo < 0) diasHastaDomingo += 7;
@@ -750,7 +735,6 @@ public class HomeFragment extends Fragment {
 
                     nuevaInstancia.fechaCompletado = null;
 
-                    // Insertar la nueva instancia
                     database.tareaDao().insertar(nuevaInstancia);
                 }
             }

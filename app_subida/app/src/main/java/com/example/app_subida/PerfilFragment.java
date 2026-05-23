@@ -63,7 +63,6 @@ public class PerfilFragment extends Fragment {
                     //tvRacha.setText(usuario.estadisticas.rachaDias + "d");
                     tvRacha.setText(String.valueOf(usuario.estadisticas.rachaDias));
 
-                    // Actualizar progreso de nivel (NIV.X → Y)
                     int nivelSiguiente = nivel + 1;
                     tvProgresoNivel.setText("PROGRESO NIV." + nivel + " → " + nivelSiguiente);
 
